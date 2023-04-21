@@ -2,7 +2,11 @@ const listaClientes = () => {
     
     return fetch('http://localhost:3000/profile') //Já faz um GET e retorna uma promise
     .then(resposta => {
-        return resposta.json()
+        
+        if(resposta.ok){
+            return resposta.json()
+        }
+        throw new Error('Não foi possível listar os clientes')
     })
     
     /* Antes do fetch, lidava-se com promise e httprequest da seguinte maneira */
@@ -34,20 +38,31 @@ const criaCliente = (nome, email) => {
         })
     })
     .then(resposta => {
-        return resposta.body
+
+        if(resposta.ok){
+            return resposta.body    
+        }
+        throw new Error('Não foi possível criar um cliente')
     })
 }
 
 const removeCliente = (id) => {
     return fetch(`http://localhost:3000/profile/${id}`, {
         method: 'DELETE',
+    }).then(resposta => {
+        if(!resposta.ok){
+            throw new Error('Não foi possível remover um cliente')
+        }
     })
 }
 
 const detalhaCliente = (id) => {
     return fetch(`http://localhost:3000/profile/${id}`) //Já faz um GET e retorna uma promise
     .then(resposta => {
-        return resposta.json()
+        if(resposta.ok){
+            return resposta.json()
+        }
+        throw new Error('Não foi possível detalhar o cliente')
     })
 }
 
@@ -63,7 +78,11 @@ const atualizaCliente = (id, nome, email) => {
         })
     })
     .then(resposta => {
-        return resposta.json()
+        
+        if(resposta.ok){
+            return resposta.json()
+        }
+        throw new Error('Não foi possível atualizar um cliente')
     })
 }
 
