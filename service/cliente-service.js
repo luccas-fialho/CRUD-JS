@@ -16,7 +16,15 @@ const criaNovaLinha = (nome, email) => {
 const tabela = document.querySelector('[data-tabela]')
 
 const listaClientes = () => {
-    const promise = new Promise((resolve, reject) => {
+    
+    return fetch('http://localhost:3000/profile') //Já faz um GET e retorna uma promise
+    .then(resposta => {
+        return resposta.json()
+    })
+    
+    /* Antes do fetch, lidava-se com promise e httprequest da seguinte maneira */
+
+    /* const promise = new Promise((resolve, reject) => {
         const http = new XMLHttpRequest()
 
         http.open('GET', 'http://localhost:3000/profile')
@@ -28,7 +36,7 @@ const listaClientes = () => {
 
         http.send()
     })
-    return promise
+    return promise */
 }
 
 listaClientes()
