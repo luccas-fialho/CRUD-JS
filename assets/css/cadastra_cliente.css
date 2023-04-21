@@ -3,3 +3,7 @@
     flex-direction: column;
     margin-top: 2rem;
 }
+
+.botao:hover {
+    cursor: pointer;
+}
